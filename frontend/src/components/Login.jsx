@@ -1,4 +1,5 @@
 import axios from 'axios';
+const API = import.meta.env.VITE_API_URL;
 import {useState} from 'react';
 import {useNavigate,Link} from 'react-router-dom';
 
@@ -8,7 +9,10 @@ const [data,setData]=useState({email:'',password:''});
 
 const login=async(e)=>{
 e.preventDefault();
-const res=await axios.post('http://localhost:5000/api/login',data);
+const res = await axios.post(
+`${API}/api/login`,
+data
+)
 localStorage.setItem('token',res.data.token)
 localStorage.setItem('studentName',res.data.name)
 localStorage.setItem('studentEmail',data.email)

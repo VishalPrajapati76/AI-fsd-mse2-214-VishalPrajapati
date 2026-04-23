@@ -1,4 +1,5 @@
 import axios from 'axios';
+const API = import.meta.env.VITE_API_URL;
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -6,7 +7,7 @@ export default function Register(){
 const [form,setForm]=useState({name:'',email:'',password:''})
 const submit=async(e)=>{
 e.preventDefault();
-await axios.post('http://localhost:5000/api/register',form)
+axios.post(`${API}/api/register`, form)
 alert('Registration Successful')
 }
 return(

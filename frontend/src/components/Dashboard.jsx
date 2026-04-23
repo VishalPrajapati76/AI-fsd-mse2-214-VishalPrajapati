@@ -3,6 +3,7 @@ import {useState,useEffect} from 'react';
 import Navbar from './Navbar';
 import GrievanceForm from './GrievanceForm';
 import GrievanceList from './GrievanceList';
+const API = import.meta.env.VITE_API_URL;
 
 export default function Dashboard(){
 const [list,setList]=useState([])
@@ -12,10 +13,7 @@ const token=localStorage.getItem('token')
 const headers={headers:{Authorization:`Bearer ${token}`}}
 
 const loadData=async()=>{
-const res=await axios.get(
-'http://localhost:5000/api/grievances',
-headers
-)
+const res=axios.get(`${API}/api/grievances`,headers)
 setList(res.data)
 }
 
@@ -24,19 +22,12 @@ loadData()
 },[])
 
 const addGrievance=async(form)=>{
-await axios.post(
-'http://localhost:5000/api/grievances',
-form,
-headers
-)
+axios.post(`${API}/api/grievances`,form,headers)
 loadData()
 }
 
 const deleteGrievance=async(id)=>{
-await axios.delete(
-`http://localhost:5000/api/grievances/${id}`,
-headers
-)
+axios.delete(`${API}/api/grievances/${id}`,headers)
 loadData()
 }
 
@@ -46,8 +37,8 @@ loadData()
 return
 }
 
-const res=await axios.get(
-`http://localhost:5000/api/grievances/search?title=${search}`,
+const res=axios.get(
+`${API}/api/grievances/search?title=${search}`,
 headers
 )
 setList(res.data)

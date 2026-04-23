@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import axios from 'axios';
-
+const API = import.meta.env.VITE_API_URL;
 export default function GrievanceList({grievances,onDelete,onRefresh}){
 const [openId,setOpenId]=useState(null)
 const [editing,setEditing]=useState(null)
@@ -18,8 +18,8 @@ setEditForm({
 }
 
 const saveUpdate=async(id)=>{
-await axios.put(
-`http://localhost:5000/api/grievances/${id}`,
+axios.put(
+`${API}/api/grievances/${id}`,
 editForm,
 headers
 )
