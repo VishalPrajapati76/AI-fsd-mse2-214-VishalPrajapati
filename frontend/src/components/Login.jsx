@@ -14,9 +14,9 @@ const res = await axios.post(
 data
 )
 localStorage.setItem('token',res.data.token)
-localStorage.setItem('studentName',res.data.name)
+localStorage.setItem('studentName',res.data.name || 'Student')
 localStorage.setItem('studentEmail',data.email)
-nav('/dashboard')
+window.location='/dashboard';
 }
 
 return(
